@@ -3,9 +3,12 @@
 add_action('wp_ajax_digthis_get_posts', 'digthis_get_posts');
 add_action('wp_ajax_nopriv_digthis_get_posts', 'digthis_get_posts');
 function digthis_get_posts(){
+	$paged = $_GET['paged'];
+
 	$args =  array(
 				'post_type' => 'post',
 				'posts_per_page' => 10,
+				'paged' => $paged
 			 );
 	$data = array();
 	$myposts = new WP_Query($args);

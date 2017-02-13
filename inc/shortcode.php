@@ -10,8 +10,15 @@ function digthis_show_posts( $atts ) {
 		.post{
 			clear: both;
 		}
+		.load-more{
+			margin-top: 10px;
+		}
 	</style>
 		<div class="digthis-posts-wrapper">
+
+		</div>
+		<div class="digthis-btn-wrapper" style="width:100%; clear:both;">
+			<input type="button" class="load-more" value="load more" data-page="1">
 		</div>
 		<script type="text/html" id="tmpl-multiple-posts">
 		<#  _.each( data, function(data){ #>
@@ -28,7 +35,5 @@ function digthis_show_posts( $atts ) {
 		</script>
 	<?php
 	return ob_get_clean();
-
-	// do shortcode actions here
 }
 add_shortcode( 'digthis_show_posts','digthis_show_posts' );
