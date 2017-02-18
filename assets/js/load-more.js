@@ -11,13 +11,17 @@ function digthisLoadPosts(url, paged){
 			data : { action : 'digthis_get_posts', page:paged },
 			beforesend: function(){
 			},
-			success: function( response ){
+			success: function( response , status, xhr){
 				if( response.success == false || response == '' || response == undefined ){
 					$( '.load-more' ).remove();
 					alert('no more posts to load');
 				}
 				else{
 					var post_template = wp.template( 'multiple-posts' );
+					//https://developer.wordpress.org/rest-api/using-the-rest-api/pagination/
+					if( xhr.getResponseHeader('X-WP-TotalPages') <= paged){
+						$( '.load-more' ).remove();
+					}
 					$('.digthis-posts-wrapper').append( post_template(response) );
 					$('.load-more').attr('disabled', false);
 				}
@@ -30,8 +34,8 @@ function digthisLoadPosts(url, paged){
 }
 
 jQuery( function($) {
-	var url = digthis.ajaxUrl;
-	//var url = digthis.restUrl;
+	//var url = digthis.ajaxUrl;
+	var url = digthis.restUrl;
 	/*Load Posts on Page Load*/
 	var page = 1;
 	//load post on initial page load
