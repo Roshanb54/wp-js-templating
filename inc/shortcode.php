@@ -14,21 +14,24 @@ function digthis_show_posts( $atts ) {
 			margin-top: 10px;
 		}
 	</style>
+
+	<!-- html markup required to be displayed on page -->
 		<div class="digthis-posts-wrapper">
 
 		</div>
 		<div class="digthis-btn-wrapper" style="width:100%; clear:both;">
 			<input type="button" class="load-more" value="load more" data-page="1">
 		</div>
+	<!-- end of html markup -->
+	<!-- javascript template to be used -->
 		<script type="text/html" id="tmpl-multiple-posts">
 		<#  _.each( data, function(data){ #>
 			<article class="post" >
 				<header class="entry-header">
-					<h1 class="entry-title">{{ data.title }}</h1>
-					<span class="entry-author">{{ data.author }}</span>
+					<h1 class="entry-title">{{ data.title.rendered }}</h1>
 				</header>
 				<div class="entry-content">
-					{{{ data.content }}}
+					{{{ data.content.rendered }}}
 				</div>
 			</article>
 		<# }); #>
